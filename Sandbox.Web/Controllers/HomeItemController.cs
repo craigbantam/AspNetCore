@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Sandbox.Domain.DTOs;
-using Sandbox.Repository;
+﻿using Microsoft.AspNetCore.Mvc;
+using Sanbox.Services;
+using Sandbox.Data.Repository;
+using Sandbox.Domain.Models;
+
 
 namespace Sandbox.Web.Controllers
 {
@@ -9,17 +10,17 @@ namespace Sandbox.Web.Controllers
     [ApiController]
     public class HomeItemController : ControllerBase
     {
-        private readonly IHomeItemsRepository _repository;
+        private readonly IHomeItemService _service;
 
-        public HomeItemController(IHomeItemsRepository repository)
+        public HomeItemController(IHomeItemService service)
         {
-            this._repository = repository;
+            _service = service;
         }
         [HttpGet]
-        [ProducesResponseType(typeof(List<HomeItemViewDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<HomeItem>), StatusCodes.Status200OK)]
         public async Task<ActionResult> Get()
         {
-            var result = _repository.GetAll();
+            var result = await _service.GetAll().ConfigureAwait(false);
             return Ok(result);
         }
     }
