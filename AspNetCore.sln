@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Web", "Sandbox.Web\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Domain", "Sandbox.Domain\Sandbox.Domain.csproj", "{B46EB98E-24F0-4332-B1E8-F8D7FC46BCE0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Data", "Sandbox.Repository\Sandbox.Data.csproj", "{2ED6D237-4934-45FC-9DC8-419B4A6D0399}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Data", "Sandbox.Data\Sandbox.Data.csproj", "{2ED6D237-4934-45FC-9DC8-419B4A6D0399}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Migrations", "Sandbox.Migrations\Sandbox.Migrations.csproj", "{84174C08-CB78-4DF2-92C3-8B79880D6174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sanbox.Services", "Sanbox.Services\Sanbox.Services.csproj", "{0415FC9C-6092-4680-9BDE-6E603B6E27D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Services", "Sandbox.Services\Sandbox.Services.csproj", "{0415FC9C-6092-4680-9BDE-6E603B6E27D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -11,11 +11,15 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Sandbox.Web.csproj", "Sandbox.Web/"]
-RUN dotnet restore "./Sandbox.Web/Sandbox.Web.csproj"
+COPY ["Sandbox.Data/Sandbox.Data.csproj", "src/Sandbox.Data/"]
+COPY ["Sandbox.Domain/Sandbox.Domain.csproj", "src/Sandbox.Domain/"]
+COPY ["Sandbox.Migrations/Sandbox.Migrations.csproj", "src/Sandbox.Migrations/"]
+COPY ["Sandbox.Services/Sandbox.Services.csproj", "src/Sandbox.Services/"]
+COPY ["Sandbox.Web/Sandbox.Web.csproj", "src/Sandbox.Web/"]
+RUN dotnet restore "src/Sandbox.Web/Sandbox.Web.csproj"
 COPY . .
 WORKDIR "/src/Sandbox.Web"
-RUN dotnet build "/Sandbox.Web.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "Sandbox.Web.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish

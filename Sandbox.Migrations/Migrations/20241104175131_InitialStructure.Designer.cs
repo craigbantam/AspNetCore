@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sandbox.Data;
 
+
 #nullable disable
 
 namespace Sandbox.Migrations.Migrations
