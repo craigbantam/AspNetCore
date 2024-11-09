@@ -10,5 +10,10 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'sandbox-client';
+
+  public get AppLoaded(): boolean {
+    return true;
+  }
+
+
 }

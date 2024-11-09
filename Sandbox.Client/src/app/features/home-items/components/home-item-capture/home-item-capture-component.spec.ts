@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeItemCaptureComponentComponent } from './home-item-capture-component.component';
+import { HomeItemCaptureComponentComponent } from './home-item-capture-component';
 
 describe('HomeItemCaptureComponentComponent', () => {
   let component: HomeItemCaptureComponentComponent;

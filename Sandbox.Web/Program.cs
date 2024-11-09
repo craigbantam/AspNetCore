@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Sanbox.Services;
 using Sandbox.Data;
 using Sandbox.Data.Repository;
@@ -12,8 +13,16 @@ builder.Services.AddDbContext<HomeItemsDbContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("Default"),
         optionsBuilder => optionsBuilder.MigrationsAssembly("Sandbox.Migrations"));
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 var app = builder.Build();
 
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 app.MapControllers();
 
