@@ -13,7 +13,7 @@ export class HomeItemHttpService {
 
   //todo: add pagination
   public getAll(): Observable<HomeItemViewDTO[]> {
-    return this.httpClient.get<HomeItemViewDTO[]>("https://localhost:7067/api/homeitem");
+    return this.httpClient.get<HomeItemViewDTO[]>("http://localhost:8080/api/homeitem");
   }
 }
 
