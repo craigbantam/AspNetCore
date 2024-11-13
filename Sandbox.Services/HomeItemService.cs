@@ -4,6 +4,7 @@ using Sandbox.Domain.Mappers;
 
 namespace Sanbox.Services
 {
+    //todo: transactioning/unit of work
     public class HomeItemService : IHomeItemService
     {
         private readonly IHomeItemsRepository _repository;
