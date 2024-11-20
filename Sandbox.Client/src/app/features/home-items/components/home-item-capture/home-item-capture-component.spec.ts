@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeItemCaptureComponentComponent } from './home-item-capture-component';
+import { HomeItemCaptureComponent } from './home-item-capture-component';
 
 describe('HomeItemCaptureComponentComponent', () => {
-  let component: HomeItemCaptureComponentComponent;
-  let fixture: ComponentFixture<HomeItemCaptureComponentComponent>;
+  let component: HomeItemCaptureComponent;
+  let fixture: ComponentFixture<HomeItemCaptureComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeItemCaptureComponentComponent]
+      imports: [HomeItemCaptureComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(HomeItemCaptureComponentComponent);
+    fixture = TestBed.createComponent(HomeItemCaptureComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

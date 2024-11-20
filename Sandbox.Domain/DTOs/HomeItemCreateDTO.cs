@@ -1,10 +1,9 @@
 ﻿namespace Sandbox.Domain.DTOs
 {
-    public class HomeItemViewDTO
-    {
-        public int Id { get; set; }
+    public class HomeItemCreateDTO
+    {        
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Location { get; set; }
+        public int LocationId { get; set; }
     }
 }

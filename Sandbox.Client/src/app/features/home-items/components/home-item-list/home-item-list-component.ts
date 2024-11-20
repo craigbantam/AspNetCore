@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { HomeItemViewDTO } from '../../../../models/home-item-view-dto';
 import { CommonModule } from '@angular/common';
 import { HomeItemHttpService } from '../../services/http/home-item-http.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home-item-list-component',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './home-item-list-component.html',
   styleUrl: './home-item-list-component.css'
 })

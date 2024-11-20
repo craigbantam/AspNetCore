@@ -2,7 +2,7 @@
 using Sandbox.Domain.DTOs;
 using Sandbox.Domain.Mappers;
 
-namespace Sanbox.Services
+namespace Sandbox.Services
 {
     //todo: transactioning/unit of work
     public class HomeItemService : IHomeItemService
@@ -13,21 +13,27 @@ namespace Sanbox.Services
         {
             _repository = repository;
         }
-        public async Task<IEnumerable<HomeItemViewDTO>> GetAll()
+
+        public async Task CreateAsync(HomeItemCreateDTO newHomeItem, CancellationToken cancellationToken)
         {
-            var modelCollectionResponse = await _repository.GetAll().ConfigureAwait(false);
+            await _repository.CreateAsync(newHomeItem.MapToModel(), cancellationToken);
+        }
+
+        public async Task<IEnumerable<HomeItemViewDTO>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var modelCollectionResponse = await _repository.GetAllAsync(cancellationToken).ConfigureAwait(false);
 
             return modelCollectionResponse.MapToDto();
         }
 
-        public async Task<HomeItemViewDTO> GetById(int id)
+        public async Task<HomeItemViewDTO> GetById(int id, CancellationToken cancellationToken)
         {
-            var modelResponse = await _repository.Get(id).ConfigureAwait(false);
+            var modelResponse = await _repository.GetAsync(id, cancellationToken).ConfigureAwait(false);
 
             return modelResponse.MapToDto();
         }
 
-        public async Task<HomeItemViewDTO> GetByName(string name)
+        public async Task<HomeItemViewDTO> GetByName(string name, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

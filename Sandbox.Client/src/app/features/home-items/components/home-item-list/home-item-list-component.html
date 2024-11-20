@@ -1,4 +1,4 @@
-<table class="table">
+<table id="customers" class="table">
     <thead>
         <tr>
             <th *ngFor="let column of columns">{{column}}</th>
@@ -11,3 +11,6 @@
     </tbody>
 
 </table>
+<div>
+    <button [routerLink]="'/create'">Create</button>
+</div>

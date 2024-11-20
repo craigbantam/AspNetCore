@@ -20,5 +20,15 @@ namespace Sandbox.Domain.Mappers
         {
             return model.Select(MapToDto).ToList();
         }
+
+        public static HomeItem MapToModel(this HomeItemCreateDTO dto)
+        {
+            return new()
+            {
+                Description = dto.Description,                
+                LocationId = dto.LocationId,
+                Name = dto.Name
+            };
+        }
     }
 }

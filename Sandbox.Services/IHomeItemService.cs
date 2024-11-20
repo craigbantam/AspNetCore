@@ -1,11 +1,12 @@
 ﻿using Sandbox.Domain.DTOs;
 
-namespace Sanbox.Services
+namespace Sandbox.Services
 {
     public interface IHomeItemService
     {
-        Task<IEnumerable<HomeItemViewDTO>> GetAll();
-        Task<HomeItemViewDTO> GetById(int id);
-        Task<HomeItemViewDTO> GetByName(string name);
+        Task<IEnumerable<HomeItemViewDTO>> GetAllAsync(CancellationToken cancellationToken);
+        Task<HomeItemViewDTO> GetById(int id, CancellationToken cancellationToken);
+        Task<HomeItemViewDTO> GetByName(string name, CancellationToken cancellationToken);
+        Task CreateAsync(HomeItemCreateDTO newHomeItem, CancellationToken cancellationToken);
     }
 }

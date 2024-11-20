@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sanbox.Services;
-using Sandbox.Domain.Models;
-
+using Sandbox.Services;
+using Sandbox.Domain.DTOs;
 
 namespace Sandbox.Web.Controllers
 {
@@ -15,12 +14,21 @@ namespace Sandbox.Web.Controllers
         {
             _service = service;
         }
+
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<HomeItem>), StatusCodes.Status200OK)]
-        public async Task<ActionResult> Get()
+        [ProducesResponseType(typeof(IEnumerable<HomeItemViewDTO>), StatusCodes.Status200OK)]
+        public async Task<ActionResult> Get(CancellationToken cancellationToken)
         {
-            var result = await _service.GetAll().ConfigureAwait(false);
+            var result = await _service.GetAllAsync(cancellationToken).ConfigureAwait(false);
             return Ok(result);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> Create(HomeItemCreateDTO newHomeItem, CancellationToken cancellationToken)
+        {
+            await _service.CreateAsync(newHomeItem, cancellationToken).ConfigureAwait(false);
+            return Ok();
         }
     }
 }

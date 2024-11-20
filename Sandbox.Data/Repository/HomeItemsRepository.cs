@@ -12,14 +12,20 @@ namespace Sandbox.Data.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<HomeItem> Get(int id)
+        public async Task CreateAsync(HomeItem entity, CancellationToken cancellationToken)
         {
-            return await _dbContext.HomeItems.Include(h => h.Location).Where(h => h.Id == id).AsNoTracking().FirstAsync();
+            await _dbContext.AddAsync(entity, cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<IEnumerable<HomeItem>> GetAll()
+        public async Task<HomeItem> GetAsync(int id, CancellationToken cancellationToken)
         {
-            return await _dbContext.HomeItems.Include(h => h.Location).AsNoTracking().ToListAsync();
+            return await _dbContext.HomeItems.Include(h => h.Location).Where(h => h.Id == id).AsNoTracking().FirstAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<HomeItem>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            return await _dbContext.HomeItems.Include(h => h.Location).AsNoTracking().ToListAsync(cancellationToken);
         }
     }
 }

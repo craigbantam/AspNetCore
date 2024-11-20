@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/app/css/generic/table.css",
               "src/styles.css"
             ],
             "scripts": []
