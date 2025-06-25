@@ -1,17 +1,24 @@
-FROM node as build
+# Build stage
+FROM node:20 AS build
 
 WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm install
 
+# Copy app source
 COPY . .
 
-RUN npm run build
+# Replace API URL in environment.prod.ts
+ARG API_URL=http://api/api
+RUN sed -i "s|apiUrl: '.*'|apiUrl: '${API_URL}'|" src/environments/environment.prod.ts
 
-FROM nginx:latest
+# Build the app using the production config
+RUN npm run build -- --configuration production
 
-COPY --from=build app/dist/sandbox-client/browser /usr/share/nginx/html
+# Serve with nginx
+FROM nginx:alpine
+
+COPY --from=build /app/dist/sandbox-client/browser /usr/share/nginx/html
 
 EXPOSE 80
