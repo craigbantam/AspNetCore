@@ -3,11 +3,12 @@ import { HomeItemViewDTO } from '../../../../models/home-item-view-dto';
 import { CommonModule } from '@angular/common';
 import { HomeItemHttpService } from '../../services/http/home-item-http.service';
 import { RouterModule } from '@angular/router';
+import { ListControlComponent } from '../controls/list-control/list-control.component';
 
 @Component({
   selector: 'app-home-item-list-component',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule, ListControlComponent],
   templateUrl: './home-item-list-component.html',
   styleUrl: './home-item-list-component.css'
 })
@@ -22,12 +23,4 @@ export class HomeItemListComponentComponent {
   ngOnInit() {
     this.homeItemHttpService.getAll().subscribe(response => this.testData = response);
   }
-
-  public get columns(): string[] {
-    return Object.keys(this.testData[0]);
-  }
-  objectKeys(obj: any): string[] {
-    return Object.keys(obj);
-  }
-
 }

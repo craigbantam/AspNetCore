@@ -14,7 +14,7 @@ export class HomeItemHttpService {
 
   //todo: add pagination
   public getAll(): Observable<HomeItemViewDTO[]> {
-    return this.httpClient.get<HomeItemViewDTO[]>(`${environment.apiUrl}/homeitem`);
+    return this.httpClient.get<HomeItemViewDTO[]>(`${environment.apiUrl}`);
   }
 }
 

@@ -20,3 +20,24 @@ table {
     background-color: rgb(104, 104, 169);
     color: white;
   }
+
+/* Pagination links */
+.pagination a {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border-radius: 5px;
+}
+
+/* Style the active/current link */
+.pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {background-color: #ddd;}

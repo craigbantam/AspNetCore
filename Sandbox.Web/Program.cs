@@ -12,7 +12,7 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-builder.WebHost.UseUrls("http://0.0.0.0:80");
+//builder.WebHost.UseUrls("http://0.0.0.0:80");
 
 // Configure logging
 builder.Logging.ClearProviders();

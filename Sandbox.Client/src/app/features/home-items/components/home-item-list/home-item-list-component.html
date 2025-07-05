@@ -1,16 +1,6 @@
-<table id="customers" class="table">
-    <thead>
-        <tr>
-            <th *ngFor="let column of columns">{{column}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let record of testData">
-            <td *ngFor="let field of columns">{{record[field]}}</td>
-        </tr>
-    </tbody>
-
-</table>
+<div>
+    <app-list-control [Data]="testData" ></app-list-control>
+</div>
 <div>
     <button [routerLink]="'/create'">Create</button>
 </div>

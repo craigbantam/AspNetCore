@@ -1,6 +1,7 @@
 ﻿using Sandbox.Data.Repository;
 using Sandbox.Domain.DTOs;
 using Sandbox.Domain.Mappers;
+using Sandbox.Domain.Pagination;
 
 namespace Sandbox.Services
 {
@@ -36,6 +37,20 @@ namespace Sandbox.Services
         public async Task<HomeItemViewDTO> GetByName(string name, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<OffsetPaginationResponseModel<HomeItemViewDTO>> GetPaginationResultAsync(OffsetPaginationRequestModel paginationRequest, CancellationToken cancellationToken)
+        {
+            var paginationResponseModel = await _repository.GetPaginationResultAsync(paginationRequest, cancellationToken).ConfigureAwait(false);
+
+            return new OffsetPaginationResponseModel<HomeItemViewDTO>
+            {
+                Entities = paginationResponseModel.Entities.MapToDto(),
+                HasNextPage = paginationResponseModel.HasNextPage,
+                HasPreviousPage = paginationResponseModel.HasPreviousPage,
+                PageNumber = paginationResponseModel.PageNumber,
+                TotalRecords = paginationResponseModel.TotalRecords
+            };
         }
     }
 }
