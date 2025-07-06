@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Sandbox.Services;
 using Sandbox.Data;
 using Sandbox.Data.Repository;
+using Sandbox.Services;
+using Sandbox.Web.StartupServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Logging.AddConsole();
 
 // Register services
 builder.Services.AddControllers();
+builder.Services.AddScoped<MigrationStartupService>();
 builder.Services.AddScoped<IHomeItemsRepository, HomeItemsRepository>();
 builder.Services.AddScoped<IHomeItemService, HomeItemService>();
 
@@ -42,6 +44,14 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 app.Services.GetService<ILogger<Program>>()?.LogInformation("App Started");
+
+using (var scope = app.Services.CreateScope())
+{
+    var migrationService = scope.ServiceProvider.GetService<MigrationStartupService>();
+    await migrationService.Init();
+}
+
+
 
 app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
