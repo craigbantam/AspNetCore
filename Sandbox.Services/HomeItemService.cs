@@ -48,6 +48,7 @@ namespace Sandbox.Services
                 Entities = paginationResponseModel.Entities.MapToDto(),
                 HasNextPage = paginationResponseModel.HasNextPage,
                 HasPreviousPage = paginationResponseModel.HasPreviousPage,
+                PageCount = paginationResponseModel.PageCount,
                 PageNumber = paginationResponseModel.PageNumber,
                 TotalRecords = paginationResponseModel.TotalRecords
             };

@@ -1,5 +1,5 @@
 <div>
-    <app-list-control [Data]="testData" ></app-list-control>
+    <app-list-control [PaginationData]="testData" (Paginate)="OnPaginate($event)"></app-list-control>
 </div>
 <div>
     <button [routerLink]="'/create'">Create</button>

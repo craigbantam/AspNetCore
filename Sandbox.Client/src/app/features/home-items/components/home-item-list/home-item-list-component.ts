@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HomeItemHttpService } from '../../services/http/home-item-http.service';
 import { RouterModule } from '@angular/router';
 import { ListControlComponent } from '../controls/list-control/list-control.component';
+import { OffsetPaginationResponseModel } from '../../../../models/offset-pagination-response-model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home-item-list-component',
@@ -16,11 +18,19 @@ export class HomeItemListComponentComponent {
 
   constructor(private homeItemHttpService: HomeItemHttpService) { }
 
-  public testData: HomeItemViewDTO[] = [
-    { Id: 1, Description: 'descr', Location: 'loc', Name: 'nam' }
-  ];
+  public testData: OffsetPaginationResponseModel<HomeItemViewDTO>;
 
   ngOnInit() {
-    this.homeItemHttpService.getAll().subscribe(response => this.testData = response);
+    this.homeItemHttpService.GetAllByPaging(1, 10).subscribe(response => {
+
+      this.testData = response;
+    });
+  }
+
+  OnPaginate(page: number) {
+    this.homeItemHttpService.GetAllByPaging(page, 10).subscribe(response => {
+
+      this.testData = response;
+    });
   }
 }

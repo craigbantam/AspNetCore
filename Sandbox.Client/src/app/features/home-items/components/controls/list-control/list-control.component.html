@@ -1,29 +1,33 @@
-<table id="data" class="table">
-    <thead>
-        <tr>
-            @for (column of columns; track column) {
-            <th>{{ column }}</th>
+<div>
+    <table id="data" class="table">
+        <thead>
+            <tr>
+                @for (column of columns; track column) {
+                <th>{{ column }}</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (record of Data; track record) {
+            <tr>
+                @for (field of columns; track field) {
+                <td>{{ record[field] }}</td>
+                }
+            </tr>
             }
-        </tr>
-    </thead>
-    <tbody>
-        @for (record of Data; track record) {
-        <tr>
-            @for (field of columns; track field) {
-            <td>{{ record[field] }}</td>
-            }
-        </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
 @if (pageCount > 1) {
-  <div class="pagination">
+<div class="pagination">
     <a href="#">&laquo;</a>
 
     @for (page of pages; track page) {
-      <a href="#">{{ page }}</a>
+    <a [class.active]="page === currentPage" (click)="onPageClick($event, page)">
+        {{ page }}
+    </a>
     }
 
     <a href="#">&raquo;</a>
-  </div>
+</div>
 }
