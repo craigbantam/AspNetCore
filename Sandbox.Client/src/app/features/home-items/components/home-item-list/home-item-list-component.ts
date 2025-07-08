@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { HomeItemViewDTO } from '../../../../models/home-item-view-dto';
 import { CommonModule } from '@angular/common';
 import { HomeItemHttpService } from '../../services/http/home-item-http.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ListControlComponent } from '../controls/list-control/list-control.component';
 import { OffsetPaginationResponseModel } from '../../../../models/offset-pagination-response-model';
-import { Subject } from 'rxjs';
+import { LoaderService } from '../../services/loader/loader-service';
 
 @Component({
   selector: 'app-home-item-list-component',
@@ -16,7 +16,9 @@ import { Subject } from 'rxjs';
 })
 export class HomeItemListComponentComponent {
 
-  constructor(private homeItemHttpService: HomeItemHttpService) { }
+  constructor(private homeItemHttpService: HomeItemHttpService,
+    private router: Router
+  ) { }
 
   public testData: OffsetPaginationResponseModel<HomeItemViewDTO>;
 
@@ -32,5 +34,9 @@ export class HomeItemListComponentComponent {
 
       this.testData = response;
     });
+  }
+
+  onNavigate(id: number) {
+    this.router.navigate([`edit/${id}`]);
   }
 }

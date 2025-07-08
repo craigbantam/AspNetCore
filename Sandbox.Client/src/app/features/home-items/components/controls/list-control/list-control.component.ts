@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { OffsetPaginationResponseModel } from '../../../../../models/offset-pagination-response-model';
-import { Subject } from 'rxjs';
 import { HomeItemViewDTO } from '../../../../../models/home-item-view-dto';
 
 @Component({
@@ -21,6 +20,9 @@ export class ListControlComponent {
     @Output()
     public Paginate: EventEmitter<number> = new EventEmitter<number>();
 
+    @Output()
+    public Navigate: EventEmitter<number> = new EventEmitter<number>();
+
     pages: number[] = [];
     pageCount: number;
     currentPage: number;
@@ -36,6 +38,11 @@ export class ListControlComponent {
 
     public get columns(): string[] {
         return this.Data && this.Data.length > 0 ? Object.keys(this.Data[0]) : [];
+    }
+
+    onNavigate(event: Event,id: number) {
+        event.preventDefault(); // Prevents the browser from jumping to `#`
+        this.Navigate.emit(id);
     }
 
     onPageClick(event: Event, page: number): void {

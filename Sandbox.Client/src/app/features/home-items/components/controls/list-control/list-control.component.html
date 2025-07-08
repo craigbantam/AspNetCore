@@ -10,8 +10,14 @@
         <tbody>
             @for (record of Data; track record) {
             <tr>
-                @for (field of columns; track field) {
-                <td>{{ record[field] }}</td>
+                @for (field of columns; let i = $index; track field) {
+                <td>
+                    @if (i === 0) {
+                    <a href="#" (click)="onNavigate($event,record.id)">{{ record[field] }}</a>
+                    } @else {
+                    {{ record[field] }}
+                    }
+                </td>
                 }
             </tr>
             }

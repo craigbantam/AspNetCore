@@ -1,8 +1,11 @@
+<div class="loader-overlay" *ngIf="isLoading">
+  <div class="spinner"></div>
+</div>
+
 <ng-container *ngIf="AppLoaded">
   <header></header>
   <main>
     <router-outlet></router-outlet>
   </main>
   <footer></footer>
-</ng-container>  
-
+</ng-container>

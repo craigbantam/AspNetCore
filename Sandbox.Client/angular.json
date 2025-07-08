@@ -26,6 +26,7 @@
             ],
             "styles": [
               "src/app/css/generic/table.css",
+              "src/app/css/generic/loader.css",
               "src/styles.css"
             ],
             "scripts": []
