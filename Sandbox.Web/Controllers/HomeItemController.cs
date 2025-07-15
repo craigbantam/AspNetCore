@@ -19,7 +19,6 @@ namespace Sandbox.Web.Controllers
         }
 
         [HttpGet]
-        [Route("/")]
         [ProducesResponseType(typeof(IEnumerable<HomeItemViewDTO>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<HomeItemViewDTO>>> GetAll(CancellationToken cancellationToken)
         {
@@ -40,10 +39,9 @@ namespace Sandbox.Web.Controllers
 
         }
 
-        [HttpGet]
-        [Route("ByPaging")]
-        [ProducesResponseType(typeof(IEnumerable<HomeItemViewDTO>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<HomeItemViewDTO>>> GetAllByPaging([FromQuery] int pageNumber, [FromQuery] int pageSize, CancellationToken cancellationToken)
+        [HttpGet("ByPaging")]
+        [ProducesResponseType(typeof(OffsetPaginationResponseModel<HomeItemViewDTO>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<OffsetPaginationResponseModel<HomeItemViewDTO>>> GetAllByPaging([FromQuery] int pageNumber, [FromQuery] int pageSize, CancellationToken cancellationToken)
         {
             try
             {
@@ -63,11 +61,27 @@ namespace Sandbox.Web.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Create(HomeItemCreateDTO newHomeItem, CancellationToken cancellationToken)
+        [ProducesResponseType(typeof(HomeItemViewDTO), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<HomeItemViewDTO>> Create([FromBody] HomeItemCreateDTO newHomeItem, CancellationToken cancellationToken)
         {
-            await _service.CreateAsync(newHomeItem, cancellationToken).ConfigureAwait(false);
-            return Ok();
+            throw new NotImplementedException();
+            //if (!ModelState.IsValid)
+            //    return BadRequest(ModelState);
+
+            //var createdItem = await _service.CreateAsync(newHomeItem, cancellationToken).ConfigureAwait(false);
+            //return CreatedAtAction(nameof(GetById), new { id = createdItem.Id }, createdItem);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(HomeItemViewDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<HomeItemViewDTO>> GetById(int id, CancellationToken cancellationToken)
+        {
+            var item = await _service.GetById(id, cancellationToken);
+            if (item == null)
+                return NotFound();
+            return Ok(item);
         }
     }
 }

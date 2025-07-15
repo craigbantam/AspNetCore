@@ -14,10 +14,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Sandbox.Data\Sandbox.Data.csproj" />
-    <ProjectReference Include="..\Sandbox.Domain\Sandbox.Domain.csproj" />
-    <ProjectReference Include="..\Sandbox.Repository\Sandbox.Data.csproj" />
+  <ItemGroup>    
+    <ProjectReference Include="..\Sandbox.Data\Sandbox.Data.csproj" />    
+    <ProjectReference Include="..\Sandbox.Domain\Sandbox.Domain.csproj" />    
   </ItemGroup>
 
 </Project>

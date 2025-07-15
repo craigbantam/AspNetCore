@@ -21,8 +21,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Sandbox.Data\Sandbox.Data.csproj" />
 		<ProjectReference Include="..\Sandbox.Domain\Sandbox.Domain.csproj" />
-		<ProjectReference Include="..\Sandbox.Migrations\Sandbox.Migrations.csproj" />
-		<ProjectReference Include="..\Sandbox.Repository\Sandbox.Data.csproj" />
+		<ProjectReference Include="..\Sandbox.Migrations\Sandbox.Migrations.csproj" />		
 		<ProjectReference Include="..\Sandbox.Services\Sandbox.Services.csproj" />
 	</ItemGroup>
 
