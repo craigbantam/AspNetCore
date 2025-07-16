@@ -1,6 +1,7 @@
 ﻿using Sandbox.Data.Repository;
 using Sandbox.Domain.DTOs;
 using Sandbox.Domain.Mappers;
+using Sandbox.Domain.Models;
 using Sandbox.Domain.Pagination;
 
 namespace Sandbox.Services
@@ -23,6 +24,23 @@ namespace Sandbox.Services
         public async Task<IEnumerable<HomeItemViewDTO>> GetAllAsync(CancellationToken cancellationToken)
         {
             var modelCollectionResponse = await _repository.GetAllAsync(cancellationToken).ConfigureAwait(false);
+
+            if (!modelCollectionResponse.Any())
+            {
+                var bulkItems = Enumerable.Range(1, 20)
+                    .Select(i => new HomeItem
+                    {
+                        Name = $"Item {i}",
+                        Description = $"Description for Item {i}",
+                        LocationId = 1 // Use a valid LocationId as appropriate
+                    })
+                    .ToList();
+
+                await _repository.CreateBulkAsync(bulkItems, cancellationToken).ConfigureAwait(false);
+
+                // Fetch the newly created items
+                modelCollectionResponse = await _repository.GetAllAsync(cancellationToken).ConfigureAwait(false);
+            }
 
             return modelCollectionResponse.MapToDto();
         }

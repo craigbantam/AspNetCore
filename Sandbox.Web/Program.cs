@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Sandbox.Data;
 using Sandbox.Data.Repository;
@@ -41,6 +42,17 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = builder.Configuration["Authentication:Authority"];
+    options.Audience = builder.Configuration["Authentication:Audience"];
+});
+
 var app = builder.Build();
 
 app.Services.GetService<ILogger<Program>>()?.LogInformation("App Started");
@@ -54,6 +66,7 @@ using (var scope = app.Services.CreateScope())
 
 
 app.UseCors("CorsPolicy");
+app.UseAuthentication();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
