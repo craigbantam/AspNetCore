@@ -2,11 +2,13 @@
 using Sandbox.Services;
 using Sandbox.Domain.DTOs;
 using Sandbox.Domain.Pagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Sandbox.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HomeItemController : ControllerBase
     {
         private readonly IHomeItemService _service;
@@ -18,7 +20,7 @@ namespace Sandbox.Web.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet]        
         [ProducesResponseType(typeof(IEnumerable<HomeItemViewDTO>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<HomeItemViewDTO>>> GetAll(CancellationToken cancellationToken)
         {

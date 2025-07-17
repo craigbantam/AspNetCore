@@ -15,6 +15,10 @@ builder.Configuration
     .AddEnvironmentVariables();
 
 //builder.WebHost.UseUrls("http://0.0.0.0:80");
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
 
 // Configure logging
 builder.Logging.ClearProviders();
@@ -51,6 +55,21 @@ builder.Services.AddAuthentication(options =>
 {
     options.Authority = builder.Configuration["Authentication:Authority"];
     options.Audience = builder.Configuration["Authentication:Audience"];
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+            logger.LogError(context.Exception, "Authentication failed: {Message}", context.Exception.Message);
+            return Task.CompletedTask;
+        },
+        OnTokenValidated = context =>
+        {
+            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+            logger.LogInformation("Token validated for {User}", context.Principal?.Identity?.Name ?? "unknown user");
+            return Task.CompletedTask;
+        }
+    };
 });
 
 var app = builder.Build();
@@ -67,6 +86,7 @@ using (var scope = app.Services.CreateScope())
 
 app.UseCors("CorsPolicy");
 app.UseAuthentication();
+app.UseAuthorization();
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
